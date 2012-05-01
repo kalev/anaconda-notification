@@ -5,11 +5,24 @@ from gi.repository import Gio
 from gi.repository import Notify
 import sys
 import os
+import time
 
 def install_cb(n, action, data):
    assert action == "install"
    n.close()
    os.execlp("liveinst", "liveinst")
+
+def show_notification(n):
+    # Spin 10 seconds, waiting for the notification service to start
+    retval = False
+    for i in range(1, 10):
+        try:
+            retval = n.show()
+            break
+        except:
+            time.sleep(1)
+
+    return retval
 
 if __name__ == '__main__':
     appinfo = Gio.DesktopAppInfo()
@@ -34,7 +47,7 @@ if __name__ == '__main__':
 
     n.add_action("install", actionlabel, install_cb, None, None)
 
-    if not n.show():
+    if not show_notification(n):
         print "Failed to send notification"
         sys.exit(1)
 
