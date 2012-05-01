@@ -1,0 +1,5 @@
+A simple notification to inform the user that it's a live system and to offer
+an easily discoverable way for starting the Fedora Installer.
+
+Used within the Fedora spin-kickstarts project:
+http://git.fedorahosted.org/git/?p=spin-kickstarts.git
