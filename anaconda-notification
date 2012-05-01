@@ -30,7 +30,7 @@ if __name__ == '__main__':
         "If you want to keep using Fedora, you can install " +
         "it to your hard disk.")
     n.set_property("icon-name","anaconda")
-    n.set_hint("resident", GLib.Variant('b',True))
+    n.set_urgency(Notify.Urgency.CRITICAL)
 
     n.add_action("install", actionlabel, install_cb, None, None)
 
