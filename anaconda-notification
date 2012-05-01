@@ -12,6 +12,9 @@ def install_cb(n, action, data):
    n.close()
    os.execlp("liveinst", "liveinst")
 
+def closed_cb(user_data):
+    sys.exit()
+
 def show_notification(n):
     # Spin 10 seconds, waiting for the notification service to start
     retval = False
@@ -45,6 +48,7 @@ if __name__ == '__main__':
     n.set_property("icon-name","anaconda")
     n.set_urgency(Notify.Urgency.CRITICAL)
 
+    n.connect("closed", closed_cb)
     n.add_action("install", actionlabel, install_cb, None, None)
 
     if not show_notification(n):
