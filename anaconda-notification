@@ -15,6 +15,16 @@ def install_cb(n, action, data):
 def closed_cb(user_data):
     sys.exit()
 
+def get_anaconda_desktop_file():
+    desktop_files = ['/usr/share/applications/anaconda.desktop',
+                     '/usr/share/applications/liveinst.desktop']
+
+    for f in desktop_files:
+        if os.path.isfile(f):
+            return f
+
+    return ""
+
 def show_notification(n):
     # Spin 10 seconds, waiting for the notification service to start
     retval = False
@@ -30,7 +40,7 @@ def show_notification(n):
 if __name__ == '__main__':
     appinfo = Gio.DesktopAppInfo()
     try:
-       desktop = appinfo.new_from_filename("/usr/share/applications/liveinst.desktop")
+       desktop = appinfo.new_from_filename(get_anaconda_desktop_file())
     except:
        sys.exit(1)
     label = desktop.get_name()
